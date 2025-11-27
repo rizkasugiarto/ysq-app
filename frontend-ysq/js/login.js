@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!form) return;
 
   const submitBtn = form.querySelector("button[type='submit']");
+  const defaultBtnText = submitBtn ? submitBtn.textContent : "Login";
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -15,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // optional: set state loading
+    // state loading
     if (submitBtn) {
       submitBtn.disabled = true;
       submitBtn.textContent = "Memproses...";
@@ -28,32 +29,42 @@ document.addEventListener("DOMContentLoaded", () => {
         body: JSON.stringify({ email, password }),
       });
 
-      const data = await res.json();
-      console.log("RESPON LOGIN:", data); // buat debug di console
+      let data = {};
+      try {
+        data = await res.json();
+      } catch {
+        data = {};
+      }
+
+      console.log("RESPON LOGIN:", data); // debug di console
 
       if (!res.ok) {
         alert(data.message || "Login gagal");
         return;
       }
 
-      // simpan info user sederhana (buat dipakai di dashboard)
+      // normalisasi role
+      const role = (data.role || "").toUpperCase();
+
+      // simpan info user (buat dipakai di dashboard)
       try {
         localStorage.setItem(
           "ysqUser",
-          JSON.stringify({ email, role: data.role })
+          JSON.stringify({ email, role })
         );
+        localStorage.setItem("role", role);
+        localStorage.setItem("email", email);
       } catch (err) {
         console.warn("Gagal menyimpan ke localStorage:", err);
       }
 
-      // Normalisasi role ke huruf besar semua
-      const role = (data.role || "").toUpperCase();
-
       // Redirect berdasarkan role
       if (role === "ADMIN") {
-        window.location.href = "admin/dasboard_admin.html";
+        window.location.href = "admin/dashboard_admin.html";
       } else if (role === "SANTRI") {
         window.location.href = "siswa/dashboardsiswa.html";
+      } else if (role === "PENGAJAR") {
+        window.location.href = "pengajar/DashboardPengajar.html";
       } else {
         alert("Role tidak dikenali, hubungi admin.");
       }
@@ -64,7 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // balikkan tombol ke normal
       if (submitBtn) {
         submitBtn.disabled = false;
-        submitBtn.textContent = "Login";
+        submitBtn.textContent = defaultBtnText;
       }
     }
   });
