@@ -1,0 +1,69 @@
+<body class="admin-dashboard-bg">
+    <div class="admin-card">
+  
+      <!-- Bagian judul yang sudah kamu punya -->
+      <h1 class="admin-title">DASHBOARD<br>ADMIN YAYASAN SAHABAT QUR'AN</h1>
+      <p class="admin-subtitle">
+        Anda login sebagai <b>ADMIN</b>. Nanti di sini bisa ditambah menu:
+        manajemen santri, kelas, presensi, pembayaran, dll.
+      </p>
+  
+      <!-- TABEL SANTRI BARU -->
+      <h2 style="color:white; margin-top:30px;">Daftar Akun Santri</h2>
+  
+      <table id="santriTable" style="width:100%; border-collapse:collapse; background:#ffffffdd; border-radius:8px; overflow:hidden;">
+        <thead style="background:#145c4b; color:white;">
+          <tr>
+            <th style="padding:8px;">No</th>
+            <th style="padding:8px;">Email</th>
+            <th style="padding:8px;">Role</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- akan diisi lewat JavaScript -->
+        </tbody>
+      </table>
+  
+      <!-- Tombol logout yang sudah ada -->
+      <button class="logout-button" onclick="logout()">Logout</button>
+    </div>
+  
+    <script>
+      // ==== LOAD DATA SANTRI DARI BACKEND ====
+      async function loadSantri() {
+        try {
+          const res = await fetch("http://localhost:8080/api/admin/santri");
+          const data = await res.json();
+  
+          const tbody = document.querySelector("#santriTable tbody");
+          tbody.innerHTML = "";
+  
+          data.forEach((item, index) => {
+            const tr = document.createElement("tr");
+  
+            tr.innerHTML = `
+              <td style="padding:6px; text-align:center;">${index + 1}</td>
+              <td style="padding:6px;">${item.email}</td>
+              <td style="padding:6px; text-transform:capitalize;">${item.role}</td>
+            `;
+  
+            tbody.appendChild(tr);
+          });
+  
+        } catch (err) {
+          console.error(err);
+          alert("Gagal memuat daftar santri");
+        }
+      }
+  
+      // ==== LOGOUT SEDERHANA ====
+      function logout() {
+        localStorage.removeItem("role");
+        window.location.href = "Login.html";
+      }
+  
+      // Panggil saat halaman dibuka
+      loadSantri();
+    </script>
+  </body>
+  

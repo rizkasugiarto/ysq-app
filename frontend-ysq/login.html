@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login – YSQ</title>
+  <link rel="stylesheet" href="css/login.css" />
+</head>
+<body class="login-page">
+
+  <div class="login-container">
+    <div class="header">
+      <!-- sesuaikan nama file logo -->
+      <img src="img/logoYSQ.png" alt="Logo YSQ" class="logo-image" />
+      <p class="organization-name">Yayasan Sahabat Qur'an</p>
+    </div>
+
+    <form class="login-form">
+      <div class="input-group">
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Email"
+          required
+        />
+        <span class="icon">@</span>
+      </div>
+
+      <div class="input-group">
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Password"
+          required
+        />
+        <span class="toggle-password" id="togglePassword">👁</span>
+      </div>
+
+      <a href="reset_password.html" class="forgot-password">
+        Lupa password?
+      </a>
+
+      <button type="submit" class="login-button">Login</button>
+    </form>
+  </div>
+
+  <script src="js/login.js"></script>
+  <script>
+    // opsional: show/hide password
+    const toggle = document.getElementById("togglePassword");
+    const pass = document.getElementById("password");
+    if (toggle && pass) {
+      toggle.addEventListener("click", () => {
+        const type = pass.type === "password" ? "text" : "password";
+        pass.type = type;
+      });
+    }
+  </script>
+</body>
+</html>
