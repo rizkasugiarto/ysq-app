@@ -16,7 +16,7 @@
             <h2>YAYASAN SAHABAT QUR'AN</h2>
         </div>
         <div class="user-info">
-            <span>Siswa</span>
+            <span id="header-student-name">Siswa</span>
             <i class='bx bx-user'></i>
         </div>
     </header>
@@ -39,14 +39,16 @@
                 <div class="info-tahsin-body">
                     <div class="info-tahsin-detail">
                         <p><strong>Informasi Kelas Tahsin</strong></p>
-                        <p>Nama: Jingga</p>
-                        <p>Level: Level A</p>
-                        <p>Jadwal: Selasa, Kamis</p>
+                        <!-- ini akan diisi dari JS -->
+                        <p>Nama: <span id="student-name">-</span></p>
+                        <p>Level: <span id="student-level">-</span></p>
+                        <p>Jadwal: <span id="student-schedule">-</span></p>
                     </div>
 
                     <div class="info-tahsin-id">
                         <p>ID Santri</p>
-                        <p class="info-tahsin-level">Tahsin Level A</p>
+                        <!-- kalau mau, isi dengan NIS atau id_santri -->
+                        <p class="info-tahsin-level" id="student-id">-</p>
                     </div>
                 </div>
             </div>
@@ -69,6 +71,7 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <!-- sementara masih static, nanti bisa dibuat dinamis juga -->
                         <tr>
                             <td>1.</td>
                             <td>Tahsin</td>
@@ -99,5 +102,7 @@
         </div>
     </div>
 
+    <!-- JS untuk ambil data dari backend dan isi dashboard -->
+    <script src="../js/dashboardsiswa.js"></script>
 </body>
 </html>

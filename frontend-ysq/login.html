@@ -1,61 +1,44 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <title>Login – YSQ</title>
-  <link rel="stylesheet" href="css/login.css" />
-</head>
-<body class="login-page">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Santri - Yayasan Sahabat Qur'an</title>
 
-  <div class="login-container">
-    <div class="header">
-      <!-- sesuaikan nama file logo -->
-      <img src="img/logoYSQ.png" alt="Logo YSQ" class="logo-image" />
-      <p class="organization-name">Yayasan Sahabat Qur'an</p>
+    <!-- Boxicons -->
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+
+    <!-- CSS LOGIN (pastikan file-nya di folder css/) -->
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="header">
+            <!-- pastikan logo ada di frontend-ysq/img/logoYSQ.png -->
+            <img src="img/logoYSQ.png" alt="Sahabat Quran Bogor Logo" class="logo-image">
+            <p class="organization-name">YAYASAN SAHABAT QUR'AN</p>
+        </div>
+
+        <!-- form login -->
+        <form class="login-form" id="login-form">
+            <div class="input-group">
+                <input type="email" id="email" placeholder="Email" required>
+                <i class='bx bx-envelope icon'></i> 
+            </div>
+
+            <div class="input-group">
+                <input type="password" id="password" placeholder="Kata Sandi" required>
+                <i class='bx bx-hide toggle-password' id="togglePassword"></i> 
+            </div>
+            
+            <a href="reset_password.html" class="forgot-password">Lupa Kata Sandi?</a>
+
+            <button type="submit" class="login-button">Login</button>
+        </form>
     </div>
 
-    <form class="login-form">
-      <div class="input-group">
-        <input
-          type="email"
-          id="email"
-          name="email"
-          placeholder="Email"
-          required
-        />
-        <span class="icon">@</span>
-      </div>
-
-      <div class="input-group">
-        <input
-          type="password"
-          id="password"
-          name="password"
-          placeholder="Password"
-          required
-        />
-        <span class="toggle-password" id="togglePassword">👁</span>
-      </div>
-
-      <a href="reset_password.html" class="forgot-password">
-        Lupa password?
-      </a>
-
-      <button type="submit" class="login-button">Login</button>
-    </form>
-  </div>
-
-  <script src="js/login.js"></script>
-  <script>
-    // opsional: show/hide password
-    const toggle = document.getElementById("togglePassword");
-    const pass = document.getElementById("password");
-    if (toggle && pass) {
-      toggle.addEventListener("click", () => {
-        const type = pass.type === "password" ? "text" : "password";
-        pass.type = type;
-      });
-    }
-  </script>
+    <!-- PANGGIL JS LOGIN (pastikan file-nya di folder js/login.js) -->
+    <script src="js/login.js"></script>
 </body>
 </html>

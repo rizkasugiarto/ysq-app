@@ -10,8 +10,9 @@ import com.ysq.backend.entity.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
+    // dipakai untuk login
     User findByEmail(String email);
 
-    // Tambahkan ini untuk list santri
+    // kalau mau ambil semua user dengan role tertentu
     List<User> findByRole(String role);
 }
