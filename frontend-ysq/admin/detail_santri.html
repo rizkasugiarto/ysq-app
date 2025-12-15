@@ -1,0 +1,102 @@
+<header class="dashboard-header">
+    <h1 class="header-title" id="page-content-title">Detail Data Santri</h1>
+</header>
+<div class="card-detail-wrapper" style="background-color: white; padding: 25px; border-radius: var(--radius-small); box-shadow: var(--shadow-light); margin-top: 25px;">
+    
+    <div style="text-align: right; margin-bottom: 20px;">
+        <button id="btn-edit-mode" class="action-btn" style="background-color: var(--color-action-btn); color: var(--color-dark-green); padding: 8px 15px; border-radius: var(--radius-small); font-size: 14px;">
+            <i class="fas fa-pencil-alt"></i> Edit
+        </button>
+
+        <button id="btn-save-mode" class="action-btn" style="background-color: var(--color-dark-green); color: white; padding: 8px 15px; border-radius: var(--radius-small); font-size: 14px; display: none;">
+            <i class="fas fa-save"></i> Simpan
+        </button>
+        
+        <button id="btn-cancel-mode" class="action-btn" style="background-color: #f44336; color: white; padding: 8px 15px; border-radius: var(--radius-small); font-size: 14px; display: none; margin-left: 10px;">
+            <i class="fas fa-times"></i> Batal
+        </button>
+    </div>
+    <form id="form-detail-santri">
+        
+        <div class="info-section info-dasar-section">
+            <div class="info-title-bar">Informasi Dasar</div>
+            <div class="info-grid">
+                
+                <div class="form-group">
+                    <label for="input-nisn">NISN</label>
+                    <input type="text" id="input-nisn" class="detail-input" value="249078561" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="input-nama-lengkap">Nama Lengkap</label>
+                    <input type="text" id="input-nama-lengkap" class="detail-input" value="David (Anak)" disabled>
+                </div>
+                
+                <div class="form-group full-width">
+                    <label for="input-alamat">Alamat</label>
+                    <input type="text" id="input-alamat" class="detail-input" value="Jl. Contoh No. 123, Bogor" disabled>
+                </div>
+
+                <div class="form-group">
+                    <label for="input-tanggal-lahir">Tanggal Lahir</label>
+                    <input type="date" id="input-tanggal-lahir" class="detail-input" value="2010-05-15" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="input-tempat-lahir">Tempat Lahir</label>
+                    <input type="text" id="input-tempat-lahir" class="detail-input" value="Bandung" disabled>
+                </div>
+
+                <div class="form-group">
+                    <label for="input-no-telepon">No. Telepon</label>
+                    <input type="text" id="input-no-telepon" class="detail-input" value="0812-1111-2222" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="input-kelas">Kelas</label>
+                    <select id="input-kelas" class="detail-select" disabled>
+                        <option value="usmanil" selected>Usmanil</option>
+                        <option value="aishah">Aishah</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-section info-akun-section">
+            <div class="info-title-bar">Informasi Akun</div>
+            <div class="info-grid">
+                
+                <div class="form-group">
+                    <label for="input-username">Username</label>
+                    <input type="text" id="input-username" class="detail-input" value="david_sq_anak" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="input-email">Email</label>
+                    <input type="email" id="input-email" class="detail-input" value="anak@gmail.ac.id" disabled>
+                </div>
+                
+                <div class="form-group">
+                    <label for="input-status">Status</label>
+                    <span id="status-display" class="detail-input input-status-display" disabled>Aktif</span>
+                    
+                    <select id="input-status-select" class="detail-select" disabled style="display: none;">
+                        <option value="Aktif">Aktif</option>
+                        <option value="Tidak Aktif">Tidak Aktif</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="input-role">Role</label>
+                    <input type="text" id="input-role" class="detail-input input-role-display" value="Siswa" disabled>
+                </div>
+
+                <div class="form-group registered-info full-width">
+                    <label for="input-terdaftar-label">Terdaftar :</label>
+                    <span id="input-terdaftar-datetime" class="registered-datetime">19 November 2025, 10:00 AM</span> 
+                </div>
+            </div>
+        </div>
+        
+    </form>
+</div>
+
+<button id="back-to-dashboard" class="action-btn back-btn"> 
+    <i class="fas fa-arrow-left"></i> Kembali
+</button>

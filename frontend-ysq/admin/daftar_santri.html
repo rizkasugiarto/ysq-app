@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daftar Santri - Sahabat Quran</title>
+
+  <link rel="stylesheet" href="../css/admin.css">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        crossorigin="anonymous" />
+</head>
+
+<body>
+  <div class="container">
+    <!-- SIDEBAR (samakan seperti admin.html kamu) -->
+    <aside class="sidebar">
+      <div class="logo">
+        <img src="../images/LogoYSQ.png" alt="Sahabat Quran" class="logo-img">
+      </div>
+
+      <nav class="menu">
+        <a href="Admin.html" class="menu-item"><i class="fas fa-home"></i> Dashboard</a>
+        <a href="daftar_jadwal.html" class="menu-item"><i class="fas fa-calendar-alt"></i> Daftar Jadwal</a>
+        <a href="daftar_kelas.html" class="menu-item"><i class="fas fa-book"></i> Daftar Kelas</a>
+        <a href="daftar_santri.html" class="menu-item active"><i class="fas fa-user-graduate"></i> Daftar Santri</a>
+        <a href="daftar_pengajar.html" class="menu-item"><i class="fas fa-chalkboard-teacher"></i> Daftar Pengajar</a>
+        <a href="riwayat_absensi.html" class="menu-item"><i class="fas fa-clipboard-list"></i> Riwayat Absensi</a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="footer-buttons-wrapper">
+          <button type="button" class="footer-btn setting" id="btn-open-profil">
+            <i class="fas fa-cog"></i> Setting Profil
+          </button>
+          <a href="login.html" class="footer-btn logout">
+            <i class="fas fa-sign-out-alt"></i> Keluar
+          </a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main-content">
+      <header class="dashboard-header">
+        <h1 class="header-title" id="page-content-title">Daftar Santri</h1>
+        <div class="admin-profile">
+          <span class="admin-text">Admin</span>
+          <i class="fas fa-user-circle admin-icon"></i>
+        </div>
+      </header>
+
+      <div class="page-container-left-aligned">
+
+        <div class="header-content-actions">
+          <div class="santri-filter-wrapper">
+            <div class="filter-group">
+              <label for="pilih-kelas-santri">Pilih Kelas:</label>
+              <select id="pilih-kelas-santri" class="profile-input class-filter-select filter-small">
+                <option value="semua">Semua</option>
+              </select>
+            </div>
+
+            <div class="filter-group">
+              <label for="kategori-filter-santri">Kategori:</label>
+              <select id="kategori-filter-santri" class="profile-input class-filter-select filter-small">
+                <option value="semua">Semua</option>
+                <option value="Dewasa">Dewasa</option>
+                <option value="Anak">Anak</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="action-right-wrapper">
+            <div class="search-box-wrapper">
+              <input type="text" id="cari-santri" class="profile-input search-input" placeholder="Cari Nama Santri">
+              <i class="fas fa-search search-icon"></i>
+            </div>
+
+            <button class="action-btn primary-btn export-btn" id="btn-export-data">
+              Ekspor Data
+            </button>
+          </div>
+        </div>
+
+        <section class="santri-table-section">
+          <div class="table-wrapper">
+            <table id="santri-list-table" class="standard-table">
+              <thead>
+                <tr class="table-header-row">
+                  <th>NO</th>
+                  <th>NIM</th>
+                  <th>Nama</th>
+                  <th>Kelas</th>
+                  <th>Email</th>
+                  <th>Jenjang</th>
+                  <th>Status</th>
+                  <th class="column-action">Aksi</th>
+                </tr>
+              </thead>
+
+              <tbody id="santri-table-body">
+                <!-- diisi oleh JS -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <button id="back-to-dashboard" class="action-btn back-btn" style="margin-top: 20px;">
+          <i class="fas fa-arrow-left"></i> Kembali
+        </button>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- WAJIB: api.js harus jalan dulu -->
+  <script type="module" src="../js/santri.js"></script>
+</body>
+</html>

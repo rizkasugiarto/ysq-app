@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Daftar Kelas Santri</title>
+
+    <!-- ========================= -->
+    <!-- CSS -->
+    <!-- ========================= -->
+    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="../css/crud.css">
+
+    <!-- (Optional) Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"
+    >
+</head>
+
+<body>
+
+    <!-- ========================= -->
+    <!-- HEADER -->
+    <!-- ========================= -->
+    <header class="dashboard-header">
+        <h1 class="header-title" id="page-content-title">
+            Daftar Kelas
+        </h1>
+        <span class="admin-text">
+            Rabu, 19 November 2025
+        </span>
+    </header>
+
+    <!-- ========================= -->
+    <!-- PAGE CONTENT -->
+    <!-- ========================= -->
+    <div class="page-container-left-aligned">
+
+        <!-- ACTION BAR -->
+        <div class="header-content-actions">
+
+            <!-- FILTER KELAS -->
+            <div class="class-filter-select-wrapper">
+                <select
+                    id="kelas-filter-select"
+                    class="profile-input class-filter-select"
+                >
+                    <option value="semua">Semua</option>
+                    <option value="belum-ada-kelas">Belum Ada Kelas</option>
+                    <option value="sudah-ada-kelas">Sudah Ada Kelas</option>
+                </select>
+            </div>
+
+            <!-- BUTTON TAMBAH (contoh) -->
+            <button class="crud-btn crud-btn-add">
+                <i class="fa fa-plus"></i> Tambah Kelas
+            </button>
+
+        </div>
+
+        <!-- ========================= -->
+        <!-- TABLE -->
+        <!-- ========================= -->
+        <div class="crud-table-wrap">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama Santri</th>
+                        <th>Kelas</th>
+                        <th>Pengajar</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Ahmad</td>
+                        <td>Tahsin A</td>
+                        <td>Ust. Ali</td>
+                        <td>
+                            <button class="crud-btn crud-btn-edit">Edit</button>
+                            <button class="crud-btn crud-btn-del">Hapus</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <!-- ========================= -->
+    <!-- JS (kalau nanti perlu) -->
+    <!-- ========================= -->
+    <!-- <script src="../js/santri.js"></script> -->
+
+</body>
+</html>
+    

@@ -1,0 +1,592 @@
+/* Halaman Login */
+body {
+    /* Background menggunakan img.jpg di tengah layar */
+    background-color: #1A473D; 
+    background-image: url('img.jpg');
+    background-position: center center;
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.login-container {
+    /* Latar Belakang semi-transparan dengan efek Blur */
+    background-color: rgba(26, 71, 61, 0.90); /* Hijau gelap semi-transparan */
+   
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    width: 350px;
+    text-align: center;
+    border: 1px solid #154A38; /* Garis emas tipis */
+}
+
+.header {
+    margin-bottom: 30px; /* Jarak antara header dan input pertama */
+}
+
+/* --- Styling Logo dan Teks di Bawahnya --- */
+.logo-image {
+    max-width: 150px; /* Ukuran logo disesuaikan */
+    height: auto; 
+    margin-bottom: 5px; /* Jarak logo ke teks di bawahnya */
+}
+
+.organization-name {
+    color: #C5AA6F; /* Warna emas */
+    font-size: 15x; /* Ukuran font subtitle */
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 0; 
+    margin-bottom: 25px; /* Jarak subtitle ke input pertama */
+}
+
+/* --- Styling Form Input dan Tombol --- */
+.login-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 15px 45px 15px 15px;
+    border: 1px solid #4A8C7B;
+    border-radius: 20px; /* Sudut input melengkung */
+    background-color: #246050; 
+    color: white;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.input-group input::placeholder {
+    color: #A9A9A9;
+}
+
+.input-group input:focus {
+    border: 1px solid var(--color-gold); /* Border emas saat fokus */
+    background-color: #4A8C7B; /* Sedikit lebih terang saat fokus */
+    outline: none; /* Hilangkan garis default browser */
+}
+
+/* Efek ketika input sudah terisi/tidak kosong (opsional) */
+.input-group input:not(:placeholder-shown) {
+    border: 1px solid #246050; 
+}
+
+.input-group .icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #C5AA6F; /* Warna ikon emas */
+    pointer-events: none;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 15px; 
+    top: 50%;
+    transform: translateY(-50%);
+    color: #C5AA6F; /* Warna ikon emas */
+    cursor: pointer; /* WAJIB: Agar bisa diklik */
+    pointer-events: auto;
+    z-index: 10;
+    font-size: 1.2em;
+}
+
+.forgot-password {
+    color: #C5AA6F; /* Warna teks emas */
+    text-decoration: none;
+    font-size: 14px;
+    text-align: right;
+    margin-bottom: 30px;
+    display: block;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+}
+
+.login-button {
+    /* Gradient tombol Login */
+    background: linear-gradient(to bottom, #E8A848, #C5AA6F); 
+    color: #1A473D;
+    border: none;
+    padding: 15px;
+    border-radius: 20px; /* Sudut tombol melengkung */
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.login-button:hover {
+    background: linear-gradient(to top, #E8A848, #C5AA6F);
+}
+
+/* Menonaktifkan ikon mata bawaan dari Chrome/Browser */
+input::-ms-reveal,
+input::-ms-clear {
+    display: none !important;
+}
+::-webkit-reveal,
+::-webkit-input-placeholder {
+    opacity: 1 !important;
+}
+/* Menghilangkan ikon 'show password' bawaan di Chrome */
+input[type="password"]::-ms-reveal {
+    display: none;
+}
+/* Menyembunyikan ikon bawaan yang ditambahkan di beberapa browser modern */
+input[type="password"]::-webkit-reveal {
+    display: none;
+}
+
+/* Pastikan input tidak memiliki padding kanan yang terlalu kecil */
+.input-group input {
+    /* Pastikan padding kanan ini cukup besar untuk menampung ikon emas Anda (misal 45px) */
+    padding: 15px 45px 15px 15px; 
+}
+
+/* Media Queries untuk Responsif */
+@media (max-width: 400px) {
+    .login-container {
+        width: 90%;
+        padding: 30px 20px;
+    }
+}
+
+/* Halaman Selamat Datang */
+/* 1. Atur body agar bisa menampung pseudo-element */
+.welcome-bg-cover {
+    /* Pastikan gambar tidak langsung diblur pada body utama */
+    background-image: none !important; 
+    position: relative; /* Agar pseudo-element bisa diposisikan di dalamnya */
+    overflow: hidden; /* Mencegah blur bocor ke luar area body */
+}
+
+/* 2. Tambahkan Pseudo-element untuk Gambar dan Filter Blur */
+.welcome-bg-cover::before {
+    content: '';
+    position: fixed; /* Penting agar background tidak bergerak saat di-scroll */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* Replikasi gambar latar belakang */
+    background-image: url('bg.jpg'); /* Ganti dengan nama file Anda */
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    /* Overlay warna agar gambar tidak terlalu terang */
+    background-color: rgba(32, 78, 74, 0.5); /* Warna overlay teal gelap (50% transparan) */
+    background-blend-mode: multiply;
+
+    /* Filter BLUR */
+    filter: blur(5px); /* Ganti angka (misalnya 3px, 5px, 10px) untuk mengatur tingkat blur */
+    
+    /* Posisikan di belakang konten utama */
+    z-index: -1;
+}
+
+/* 2. Container/Card Hijau Gelap */
+.welcome-card {
+    /* HAPUS background-color agar transparan */
+    background-color: transparent; 
+    
+    /* HAPUS border agar tidak ada garis bingkai */
+    border: none;
+    
+    padding: 20px 40px 40px 40px; 
+    border-radius: 10px;
+    box-shadow: none; /* HAPUS shadow agar kontainer tidak terlihat seperti kotak */
+    width: 400px; 
+    max-width: 90%;
+    text-align: center;
+    position: relative; 
+    margin-top: 50px; 
+}
+
+/* 3. Penempatan Logo (Gaya "Terpotong" di Atas Card) */
+.welcome-header {
+    /* Mengatur posisi logo di luar batas container */
+    position: absolute; 
+    top: -95px; /* Menggeser logo ke atas, potongannya tergantung ukuran logo */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+}
+
+.logo-image-welcome {
+    max-width: 150px; 
+    height: auto;
+    
+    /* HAPUS background-color agar transparan dan menyatu dengan background */
+    background-color: transparent; 
+    
+    padding: 15px 20px;
+    border-radius: 0 0 75px 75px; 
+    margin: 0 auto;
+    display: block;
+}
+
+.organization-tagline-small {
+    color: #C5AA6F; 
+    font-size: 0.7em; 
+    font-weight: normal;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: -15px; /* Geser ke atas agar dekat logo */
+}
+
+/* 4. Teks Sapaan Utama (Memperbaiki Penumpukan) */
+
+.main-greeting-wrapper {
+    margin-top: 60px; /* Jarak dari bawah logo ke teks sapaan */
+    margin-bottom: 40px;
+    line-height: 1.1; 
+}
+
+.greeting-line-1 {
+    color: #E8A848; 
+    font-size: 1.8em; 
+    font-weight: normal; 
+    margin: 0;
+    padding: 0;
+    display: block;
+}
+
+.greeting-line-2 {
+    color: #E8A848; 
+    font-size: 1.8em; 
+    font-weight: bold; 
+    margin: 5px 0 0 0; 
+    padding: 0;
+    display: block;
+}
+
+/* 5. Styling Tombol */
+.button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; 
+}
+
+.welcome-button {
+    text-decoration: none; 
+    padding: 15px;
+    border-radius: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: block; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Tombol Login (Gradient Emas) */
+.login-btn {
+    background: linear-gradient(to bottom, #E8A848, #C5AA6F); 
+    color: #1A473D; 
+    border: none;
+}
+
+.login-btn:hover {
+    background: linear-gradient(to top, #E8A848, #C5AA6F);
+}
+
+/* Tombol Pendaftaran (Hijau Gelap) */
+.register-btn {
+    background-color: #246050; 
+    color: white;
+    border: none; 
+}
+
+.register-btn:hover {
+    background-color: #4A8C7B;
+}
+
+/* Media Queries untuk Responsif */
+@media (max-width: 500px) {
+    .welcome-card {
+        width: 90%;
+        padding: 30px 20px;
+    }
+}
+
+/* Halaman Registrasi */
+body {
+    background-color: #1A473D;
+    background-image: url('../img.jpg');
+    background-position: center center;
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+
+
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+/* --- Container Registrasi --- */
+
+.register-container {
+/* Background semi-transparan */
+
+    background-color: rgba(21, 74, 56, 0.95);
+    padding: 33px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    width: 450px;
+    border: 1px solid #154A38; /* Border emas */
+}
+
+/* --- Gaya Header Registrasi --- */
+
+.registrasi-header {
+    text-align: left;
+    margin-bottom: 0;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(197, 170, 111, 0.3);
+}
+
+.title {
+    color: white;
+    font-size: 28px;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    color: #A9A9A9;
+    font-size: 14px;
+    margin-top: 0;
+    margin-bottom: 4px;
+    line-height: 1.4;
+}
+
+/* --- Gaya Form Input & Label --- */
+.register-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.input-group label {
+    display: block;
+    text-align: left;
+    color: white; /* Label berwarna putih */
+    font-size: 15px;
+    margin-bottom: 8px;
+}
+
+/* GAYA BOXICONS DITAMBAHKAN DI SINI */
+.input-group label i {
+    color: #C5AA6F; /* Warna ikon Boxicons menjadi Emas/Kuning */
+    margin-right: 5px;
+}
+
+.input-group {
+    margin-top: 10px; /* Sedikit jarak ekstra */
+    margin-bottom: 10px;
+    width: 100%; /* Agar input group mengisi lebar form */
+}
+
+/* Tata Letak Dua Input Berdampingan */
+.two-forms {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.two-forms .half-width {
+    flex: 1;
+}
+
+/* --- Pemisahan Gaya Input (Sekarang Lebih Mudah Diubah) --- */
+/* 1. Gaya untuk input type="text" (Nama Lengkap, Tempat Lahir) */
+.register-form input[type="text"],
+.register-form input[type="tel"],
+.register-form input[type="email"],
+/* Tambahkan juga type="date" untuk konsistensi */
+.register-form input[type="date"] {
+    width: 100%;
+    /* Gunakan padding yang lebih kecil di sini */
+    padding: 10px; /* Coba 10px atau 8px */ 
+    border: 1px solid #4A8C7B;
+    border-radius: 20px; 
+    background-color: #246050; 
+    color: white;
+    font-size: 14.5px; /* Sesuaikan font jika perlu */
+    box-sizing: border-box;
+}
+
+/* --- Gaya Checkbox --- */
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0px;
+    width: 100%;
+}
+
+.checkbox-group input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin-right: 10px;
+    accent-color: #E8A848;
+}
+
+.checkbox-group label {
+    color: #A9A9A9;
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+/* --- Gaya Tombol Daftar (.daftar-btn) --- */
+
+.daftar-btn {
+    width: 100%;
+    /* Memastikan tombol rata tengah */
+    margin: 0 auto;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    background: linear-gradient(to bottom, #E8A848, #C5AA6F);
+    color: #1A473D;
+    border: none;
+    padding: 11px;
+    border-radius: 20px;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.daftar-btn:hover {
+    background: linear-gradient(to top, #E8A848, #C5AA6F);
+}
+
+/* --- Media Queries (Responsif) --- */
+
+@media (max-width: 600px) {
+    .register-container {
+        width: 90%;
+        padding: 30px 20px;
+    }
+
+    .two-forms {
+        flex-direction: column;
+        gap: 0;
+    }
+} 
+
+/* --- GAYA HALAMAN REGISTRASI BERHASIL --- */
+/* --- Kontainer Keberhasilan (Sama dengan .register-container, tapi lebih besar) --- */
+.success-container {
+    background-color: rgba(21, 74, 56, 0.95); 
+    padding: 60px 40px; /* Padding besar untuk area kosong */
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    width: 550px; /* Lebar untuk tampilan besar */
+    text-align: center;
+    border: 1px solid #154A38;
+}
+
+/* --- Area Logo --- */
+.logo-area {
+    margin-bottom: 10px;
+}
+
+.logo-image {
+    width: 200px; 
+    height: auto;
+    display: block;
+    margin: 0 auto 5px auto;
+}
+
+.logo-subtitle {
+    font-size: 10px;
+    color: #C5AA6F;
+    letter-spacing: 2px;
+    margin: 0;
+}
+
+
+/* --- Judul Keberhasilan --- */
+.success-title {
+    color: #E8A848; /* Warna Emas/Kuning */
+    font-size: 38px;
+    margin-bottom: 35px;
+    line-height: 1.2;
+    font-weight: bold;
+}
+
+/* --- Ikon Centang (Checkmark) --- */
+.checkmark-circle {
+    background-color: #2ED47A; /* Hijau cerah untuk centang */
+    color: white;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%; /* Lingkaran */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 35px auto; 
+}
+
+.checkmark-circle i {
+    font-size: 50px; 
+}
+
+/* --- Pesan Keberhasilan --- */
+.success-message {
+    color: white;
+    font-size: 16px;
+    line-height: 1.6;
+    margin-top: 15px;
+}
+
+/* --- Teks Status di Pojok Kiri Atas (Opsional) --- */
+.top-status-text {
+    position: fixed; 
+    top: 20px;
+    left: 20px;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Media Query untuk Responsif pada halaman sukses */
+@media (max-width: 700px) {
+    .success-container {
+        width: 90%;
+        padding: 40px 20px;
+    }
+    .success-title {
+        font-size: 32px;
+    }
+    /* ... (lanjutkan penyesuaian responsif lainnya) ... */
+}

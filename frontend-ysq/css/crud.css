@@ -1,0 +1,133 @@
+/* =========================
+   CRUD SAFE STYLES (NO NABRAK ADMIN.CSS)
+   ========================= */
+
+/* Fix gambar/logo biar ga nge-zoom */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.logo-img {
+  width: 170px;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Table wrapper aman */
+.crud-table-wrap {
+  background: #fff;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  overflow-x: auto;
+}
+
+/* tombol aksi CRUD */
+.crud-btn {
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.crud-btn-add {
+  background: #D2A047;
+  color: #275238;
+}
+
+.crud-btn-edit {
+  background: #275238;
+  color: #fff;
+}
+
+.crud-btn-del {
+  background: #a04949;
+  color: #fff;
+}
+
+/* Modal CRUD (unik: prefix crud-) */
+.crud-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.crud-modal.is-open { 
+  display: flex; 
+}
+
+.crud-modal-card {
+  width: 100%;
+  max-width: 520px;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  overflow: hidden;
+}
+
+.crud-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  border-bottom: 1px solid #eee;
+}
+
+.crud-modal-title {
+  font-size: 18px;
+  font-weight: 800;
+  color: #275238;
+}
+
+.crud-modal-x {
+  border: none;
+  background: transparent;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.crud-modal-body { 
+  padding: 18px; 
+}
+
+.crud-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.crud-field label {
+  font-size: 13px;
+  font-weight: 700;
+  color: #275238;
+}
+
+.crud-input, 
+.crud-select {
+  padding: 10px 12px;
+  border: 1px solid #cfcfcf;
+  border-radius: 10px;
+  outline: none;
+  font-size: 14px;
+}
+
+.crud-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  padding: 14px 18px;
+  border-top: 1px solid #eee;
+}
+
+.crud-btn-cancel {
+  background: #eee;
+  color: #333;
+}

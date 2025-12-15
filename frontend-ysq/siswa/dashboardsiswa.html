@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DASHBOARD Siswa</title>
+    <link rel="stylesheet" href="../css/siswa.css">
+
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+</head>
+<body>
+
+    <header class="header">
+        <div class="logo-section">
+            <!-- LOGO dari folder frontend-ysq/img -->
+            <img src="../img/logoYSQ.png" alt="Logo Yayasan">
+            <h2>YAYASAN SAHABAT QUR'AN</h2>
+        </div>
+        <div class="user-info">
+            <span id="header-student-name">Siswa</span>
+            <i class='bx bx-user'></i>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <div class="dashboard-card">
+            <h1>DASHBOARD SISWA</h1>
+            
+            <div class="sub-nav">
+                <button class="active">Dashboard</button>
+                <a href="absensisiswa.html">Riwayat Absen</a>
+                <button>Raport</button>
+                <button>Student Bill</button>
+            </div>
+
+            <div class="info-tahsin">
+                <!-- GAMBAR kelas dari folder frontend-ysq/img -->
+                <img src="../img/kelas.jpg" alt="Ruang Kelas" class="info-tahsin-image">
+
+                <div class="info-tahsin-body">
+                    <div class="info-tahsin-detail">
+                        <p><strong>Informasi Kelas Tahsin</strong></p>
+                        <!-- ini akan diisi dari JS -->
+                        <p>Nama: <span id="student-name">-</span></p>
+                        <p>Level: <span id="student-level">-</span></p>
+                        <p>Jadwal: <span id="student-schedule">-</span></p>
+                    </div>
+
+                    <div class="info-tahsin-id">
+                        <p>ID Santri</p>
+                        <!-- kalau mau, isi dengan NIS atau id_santri -->
+                        <p class="info-tahsin-level" id="student-id">-</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="student-event-section">
+                <div class="student-event-tabs">
+                    <button class="active">Student Info</button>
+                    <button>Event</button>
+                </div>
+
+                <table class="info-table">
+                    <thead>
+                        <tr>
+                            <th>NO</th>
+                            <th>Subjek</th>
+                            <th>Hari</th>
+                            <th>Jam</th>
+                            <th>Guru</th>
+                            <th>Materi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- sementara masih static, nanti bisa dibuat dinamis juga -->
+                        <tr>
+                            <td>1.</td>
+                            <td>Tahsin</td>
+                            <td>Senin</td>
+                            <td>08.00 - 10.00</td>
+                            <td>pengajar@gmail.co.id</td>
+                            <td><i class='bx bx-file'></i></td>
+                        </tr>
+                        <tr>
+                            <td>2.</td>
+                            <td>Tahsin</td>
+                            <td>Senin</td>
+                            <td>10.00 - 11.30</td>
+                            <td>pengajar@gmail.co.id</td>
+                            <td><i class='bx bx-file'></i></td>
+                        </tr>
+                        <tr>
+                            <td>3.</td>
+                            <td>Tahsin</td>
+                            <td>Senin</td>
+                            <td>08.00 - 09.00</td>
+                            <td>pengajar@gmail.co.id</td>
+                            <td><i class='bx bx-file'></i></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- JS untuk ambil data dari backend dan isi dashboard -->
+    <script src="../js/dashboardsiswa.js"></script>
+</body>
+</html>

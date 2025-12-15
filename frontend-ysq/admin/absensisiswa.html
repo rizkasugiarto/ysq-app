@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ABSENSI SISWA (ADMIN)</title>
+
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+
+  <!-- CSS di root /css -->
+  <link rel="stylesheet" href="../css/admin.css" />
+  <link rel="stylesheet" href="../css/siswa.css" />
+</head>
+
+<body>
+  <header class="header">
+    <div class="logo-section">
+      <!-- logo kamu ada di root frontend-ysq/logoYSQ.png -->
+      <img src="../logoYSQ.png" alt="Logo Yayasan" />
+      <h2>YAYASAN SAHABAT QUR'AN</h2>
+    </div>
+
+    <div class="user-info">
+      <span id="admin-name-top">Admin</span>
+      <i class="bx bx-user"></i>
+    </div>
+  </header>
+
+  <div class="main-container">
+    <div class="attendance-card">
+      <h1>ABSENSI SISWA</h1>
+
+      <!-- NAV ADMIN -->
+      <div class="sub-nav scroll-x">
+        <a href="Admin.html">Dashboard</a>
+        <a href="daftar_santri.html">Data Santri</a>
+        <a href="daftar_pengajar.html">Data Pengajar</a>
+        <a class="active" href="absensisiswa.html">Absensi</a>
+      </div>
+
+      <!-- FILTER (ADMIN pilih siswa) -->
+      <div class="date-filter responsive-filter" style="flex-wrap:wrap;">
+        <label>ID Santri:</label>
+        <input type="number" id="santri-id" placeholder="contoh: 3" style="max-width:140px;" />
+
+        <label>Start Date:</label>
+        <input type="date" id="start-date" />
+
+        <label>End Date:</label>
+        <input type="date" id="end-date" />
+
+        <button id="btn-load" type="button">Load</button>
+        <button id="export-excel" type="button">Export Excel</button>
+      </div>
+
+      <!-- SUMMARY -->
+      <div class="summary-cards summary-grid">
+        <div class="summary-card">
+          <div class="summary-card-value total" id="sum-total">0</div>
+          <div class="summary-card-label">Total Pertemuan</div>
+        </div>
+        <div class="summary-card">
+          <div class="summary-card-value hadir" id="sum-hadir">0</div>
+          <div class="summary-card-label">Hadir</div>
+        </div>
+        <div class="summary-card">
+          <div class="summary-card-value izin" id="sum-izin">0</div>
+          <div class="summary-card-label">Izin</div>
+        </div>
+        <div class="summary-card">
+          <div class="summary-card-value sakit" id="sum-sakit">0</div>
+          <div class="summary-card-label">Sakit</div>
+        </div>
+        <div class="summary-card">
+          <div class="summary-card-value alfa" id="sum-alfa">0</div>
+          <div class="summary-card-label">Alfa</div>
+        </div>
+        <div class="summary-card">
+          <div class="summary-card-value mustamilah" id="sum-mustamilah">0</div>
+          <div class="summary-card-label">Mustamilah</div>
+        </div>
+      </div>
+
+      <!-- TABLE -->
+      <div class="table-wrapper">
+        <table class="info-table attendance-table">
+          <thead>
+            <tr>
+              <th>Tanggal</th>
+              <th>Kelas</th>
+              <th>Jam</th>
+              <th>Catatan</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="absensi-body">
+            <!-- diisi oleh JS -->
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- XLSX -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+  <!-- JS ADMIN ABSENSI (aku buat inline biar kamu tinggal copy 1 file) -->
+  <script>
+    // ========== CONFIG ==========
+    const API_BASE = "http://localhost:8080";
+
+    function qs(id){ return document.getElementById(id); }
+
+    function renderRows(rows){
+      const tbody = qs("absensi-body");
+      tbody.innerHTML = "";
+
+      rows.forEach(r => {
+        const tr = document.createElement("tr");
+
+        const tdTgl = document.createElement("td");
+        tdTgl.textContent = r.tanggal || "-";
+
+        const tdKelas = document.createElement("td");
+        tdKelas.textContent = r.kelas || "-";
+
+        const tdJam = document.createElement("td");
+        tdJam.textContent = r.jam || "-";
+
+        const tdCat = document.createElement("td");
+        tdCat.textContent = r.catatan || "-";
+
+        const tdStatus = document.createElement("td");
+        const status = (r.status || "-").toLowerCase();
+
+        const span = document.createElement("span");
+        span.textContent = r.status || "-";
+        if (status.includes("hadir")) span.className = "status-hadir";
+        else if (status.includes("sakit")) span.className = "status-sakit";
+        else if (status.includes("alfa")) span.className = "status-alfa";
+        tdStatus.appendChild(span);
+
+        tr.append(tdTgl, tdKelas, tdJam, tdCat, tdStatus);
+        tbody.appendChild(tr);
+      });
+    }
+
+    function setSummary(sum){
+      qs("sum-total").textContent = sum.total ?? 0;
+      qs("sum-hadir").textContent = sum.hadir ?? 0;
+      qs("sum-izin").textContent = sum.izin ?? 0;
+      qs("sum-sakit").textContent = sum.sakit ?? 0;
+      qs("sum-alfa").textContent = sum.alfa ?? 0;
+      qs("sum-mustamilah").textContent = sum.mustamilah ?? 0;
+    }
+
+    async function loadAbsensi(){
+      const id = (qs("santri-id").value || "").trim();
+      if(!id){
+        alert("Isi ID Santri dulu ya (contoh: 3)");
+        return;
+      }
+
+      const start = qs("start-date").value;
+      const end = qs("end-date").value;
+
+      // ✅ endpoint contoh (kamu sesuaikan backend)
+      // misal: GET /api/absensi/santri/{id}?start=YYYY-MM-DD&end=YYYY-MM-DD
+      let url = `${API_BASE}/api/absensi/santri/${encodeURIComponent(id)}`;
+      const params = [];
+      if(start) params.push(`start=${encodeURIComponent(start)}`);
+      if(end) params.push(`end=${encodeURIComponent(end)}`);
+      if(params.length) url += `?${params.join("&")}`;
+
+      try{
+        const res = await fetch(url);
+        if(!res.ok) throw new Error("HTTP " + res.status);
+
+        const data = await res.json();
+
+        // format yang diharapkan:
+        // { summary:{total,hadir,izin,sakit,alfa,mustamilah}, rows:[{tanggal,kelas,jam,catatan,status}] }
+        setSummary(data.summary || {});
+        renderRows(data.rows || []);
+      }catch(err){
+        console.error(err);
+        alert("Gagal load absensi (cek endpoint backend / CORS).");
+        setSummary({});
+        renderRows([]);
+      }
+    }
+
+    function exportExcel(){
+      const table = document.querySelector(".attendance-table");
+      const wb = XLSX.utils.table_to_book(table, { sheet: "Absensi" });
+      XLSX.writeFile(wb, "absensi_siswa_admin.xlsx");
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      qs("btn-load").addEventListener("click", loadAbsensi);
+      qs("export-excel").addEventListener("click", exportExcel);
+
+      // optional: isi nama admin dari localStorage kalau ada
+      try{
+        const role = localStorage.getItem("role");
+        const email = localStorage.getItem("email");
+        if(role) qs("admin-name-top").textContent = role;
+        if(email) qs("admin-name-top").textContent = "Admin";
+      }catch(e){}
+    });
+  </script>
+</body>
+</html>
