@@ -1,0 +1,104 @@
+<body class="admin-dashboard-bg">
+  <div class="admin-card">
+
+    <!-- JUDUL -->
+    <h1 class="admin-title">DASHBOARD<br>ADMIN YAYASAN SAHABAT QUR'AN</h1>
+    <p class="admin-subtitle">
+      <link rel="stylesheet" href="admin.css">
+      Anda login sebagai <b>ADMIN</b>.<br>
+      Di sini nanti bisa ditambah menu: manajemen santri, kelas, presensi, pembayaran, dll.
+    </p>
+
+    <!-- AKSI ATAS: TOMBOL TAMBAH + REFRESH -->
+    <div style="display:flex; justify-content:space-between; align-items:center; margin:20px 0;">
+      <h2 style="color:white; margin:0;">Daftar Santri</h2>
+
+      <div>
+        <button onclick="loadSantri()" style="margin-right:8px;" class="logout-button">
+          Refresh Data
+        </button>
+        <a href="Tambah_Siswa.html" class="logout-button" style="text-decoration:none; padding:10px 16px;">
+          + Tambah Santri
+        </a>
+      </div>
+    </div>
+
+    <!-- TABEL SANTRI -->
+    <table id="santriTable"
+           style="width:100%; border-collapse:collapse; background:#ffffffdd; border-radius:8px; overflow:hidden;">
+      <thead style="background:#145c4b; color:white;">
+        <tr>
+          <td style="padding:8px;">No</td>
+          <td style="padding:8px;">Nama</td>
+          <td style="padding:8px;">Alamat</td>
+          <td style="padding:8px;">No. WA</td>
+          <td style="padding:8px;">Kelas</td>
+          <td style="padding:8px;">Status</td>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- akan diisi lewat JavaScript -->
+      </tbody>
+    </table>
+
+    <!-- TOMBOL LOGOUT -->
+    <button class="logout-button" style="margin-top:24px;" onclick="logout()">Logout</button>
+  </div>
+
+  <script>
+    const API_BASE = "http://localhost:8080";
+
+    async function loadSantri() {
+      try {
+        const res = await fetch(API_BASE + "/api/admin/santri");
+        if (!res.ok) {
+          throw new Error("HTTP " + res.status);
+        }
+
+        const data = await res.json();
+
+        const tbody = document.querySelector("#santriTable tbody");
+        tbody.innerHTML = "";
+
+        if (!Array.isArray(data) || data.length === 0) {
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+            <td colspan="6" style="padding:10px; text-align:center; color:#666;">
+              Belum ada data santri.
+            </td>
+          `;
+          tbody.appendChild(tr);
+          return;
+        }
+
+        data.forEach((item, index) => {
+          const tr = document.createElement("tr");
+
+          tr.innerHTML = `
+            <td style="padding:6px; text-align:center;">${index + 1}</td>
+            <td style="padding:6px;">${item.nama ?? "-"}</td>
+            <td style="padding:6px;">${item.alamat ?? "-"}</td>
+            <td style="padding:6px;">${item.noWa ?? "-"}</td>
+            <td style="padding:6px;">${item.kelas ?? "-"}</td>
+            <td style="padding:6px; text-transform:uppercase;">${item.status ?? "-"}</td>
+          `;
+
+          tbody.appendChild(tr);
+        });
+
+      } catch (err) {
+        console.error("Gagal load santri:", err);
+        alert("Gagal memuat daftar santri dari server.");
+      }
+    }
+
+    function logout() {
+      localStorage.removeItem("ysqUser");
+      localStorage.removeItem("role");
+      localStorage.removeItem("email");
+      window.location.href = "../login.html";
+    }
+
+    loadSantri();
+  </script>
+</body>
